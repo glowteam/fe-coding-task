@@ -1,0 +1,20 @@
+{
+  "name": "fe-coding-task",
+  "homepage": "https://github.com/joedunu/fe-coding-task",
+  "authors": [
+    "Anuradha Dunuhappawa <joedunu@gmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "highcharts": "^5.0.0"
+  }
+}

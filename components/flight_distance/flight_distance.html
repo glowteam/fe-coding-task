@@ -1,0 +1,10 @@
+<div class="flightDistance">
+    Filter by Destination:
+    <select ng-model="flightDistanceCtrl.destination" ng-change="flightDistanceCtrl.displayChart()">
+        <option ng-repeat="destinationItem in flightDistanceCtrl.destinationList"
+                value="{{destinationItem}}">{{destinationItem}}
+        </option>
+    </select>
+
+    <div id="flightDistanceContainer" style="width:100%; height:400px;"></div>
+</div>

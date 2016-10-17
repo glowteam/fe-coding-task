@@ -1,0 +1,10 @@
+<div class="flightDelay">
+    Filter by Destination:
+    <select ng-model="flightDelayCtrl.destination" ng-change="flightDelayCtrl.displayChart()">
+        <option ng-repeat="destinationItem in flightDelayCtrl.destinationList"
+                value="{{destinationItem}}"> {{destinationItem}}
+        </option>
+    </select>
+
+    <div id="flightDelayContainer" style="width:100%; height:400px;"></div>
+</div>

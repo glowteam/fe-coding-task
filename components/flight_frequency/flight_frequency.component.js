@@ -14,24 +14,32 @@ angular.module('flightDataAnalysisApp')
             self.displayChart = function () {
 
                 if (self.destination && self.destination !== '') {
-                    var distanceList = [];
+                    var frequencyList = [];
                     var originList = [];
+                    var dateList = [];
 
                     angular.forEach(self.flightData, function (flight) {
                         if (flight.destination === self.destination) {
-                            originList.push(flight.origin);
-                            distanceList.push(parseInt(flight.distance));
+                            if (originList.indexOf(flight.origin) === -1) {
+                                originList.push(flight.origin);
+                                dateList.push(flight.date);
+                                frequencyList.push(1);
+                            } else {
+                                // if (dateList[originList.indexOf(flight.origin)] === flight.date) {
+                                    frequencyList[originList.indexOf(flight.origin)] += 1;
+                                // }
+                            }
                         }
                     });
 
                     if (self.destination) {
-                        Highcharts.chart('container', {
+                        Highcharts.chart('flightFrequencyContainer', {
                             chart: {
                                 renderTo: 'container',
-                                type: 'column'
+                                type: 'line'
                             },
                             title: {
-                                text: 'Flight Distance to ' + self.destination
+                                text: 'Flight Frequency to ' + self.destination
                             },
                             xAxis: {
                                 categories: originList,
@@ -41,12 +49,12 @@ angular.module('flightDataAnalysisApp')
                             },
                             yAxis: {
                                 title: {
-                                    text: 'Flight Distance (km)'
+                                    text: 'Flights'
                                 }
                             },
                             series: [{
                                 name: self.destination,
-                                data: distanceList
+                                data: frequencyList
                             }]
                         });
                     }
@@ -56,7 +64,7 @@ angular.module('flightDataAnalysisApp')
             self.$onInit = function () {
                 return dataService.getFlightData()
                     .then(function (flightData) {
-                        self.flightData = JSON.parse(flightData);
+                        self.flightData = flightData;
                         var defer = $q.defer();
                         angular.forEach(self.flightData, function (flight) {
                             if (self.destinationList.indexOf(flight.destination) === -1) {

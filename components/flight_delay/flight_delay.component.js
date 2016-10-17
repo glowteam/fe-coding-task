@@ -1,15 +1,17 @@
-'use strict';
+/**
+ * Created by Anuradha on 16/10/2016.
+ */
 
 angular.module('flightDataAnalysisApp')
-    .component('flightDistance', {
-        bindings: {
-            flightData: '<'
-        },
-        templateUrl: './components/flight_distance/flight_distance.html',
-        controllerAs: 'flightDistanceCtrl',
+    .component('flightDelay', {
+        // bindings: {
+        //     flightData: '<'
+        // },
+        templateUrl: './components/flight_delay/flight_delay.html',
+        controllerAs: 'flightDelayCtrl',
         controller: function ($q, dataService) {
-
             var self = this;
+
             self.destination = '';
             self.destinationList = [];
             self.originList = [];
@@ -17,25 +19,29 @@ angular.module('flightDataAnalysisApp')
             self.displayChart = function () {
 
                 if (self.destination && self.destination !== '') {
-                    var distanceList = [];
+                    var delayList = [];
                     var originList = [];
 
                     angular.forEach(self.flightData, function (flight) {
-                        // Considered only the distance found at first occurrence
-                        if (flight.destination === self.destination && originList.indexOf(flight.origin) === -1) {
-                            originList.push(flight.origin);
-                            distanceList.push(parseInt(flight.distance));
+                        if (flight.destination === self.destination) {
+                            if (originList.indexOf(flight.origin) === -1) {
+                                originList.push(flight.origin);
+                                delayList.push(parseInt(flight.delay));
+                            } else {
+                                var delay = ((delayList[originList.indexOf(flight.origin)] + parseInt(flight.delay)) / 2 );
+                                delayList[originList.indexOf(flight.origin)] = delay;
+                            }
                         }
                     });
 
                     if (self.destination) {
-                        Highcharts.chart('flightDistanceContainer', {
+                        Highcharts.chart('flightDelayContainer', {
                             chart: {
                                 renderTo: 'container',
-                                type: 'column'
+                                type: 'line'
                             },
                             title: {
-                                text: 'Flight Distance to ' + self.destination
+                                text: 'Flight Delay to ' + self.destination
                             },
                             xAxis: {
                                 categories: originList,
@@ -45,12 +51,12 @@ angular.module('flightDataAnalysisApp')
                             },
                             yAxis: {
                                 title: {
-                                    text: 'Flight Distance (km)'
+                                    text: 'Flight delay'
                                 }
                             },
                             series: [{
                                 name: self.destination,
-                                data: distanceList
+                                data: delayList
                             }]
                         });
                     }

@@ -93,6 +93,7 @@ angular.module('flightDataAnalysisApp')
                 url: '/components/data_service/flight-data-gz.csv'
             }).then(function successCallback(response) {
                 var flightData = CSV2JSON(response.data);
+                flightData = JSON.parse(flightData);
                 defer.resolve(flightData);
             });
 

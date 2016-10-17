@@ -78,24 +78,26 @@ angular.module('flightDataAnalysisApp')
 
         this.getFlightData = function () {
             var defer = $q.defer();
-            // $http({
-            //     method: 'GET',
-            //     url: 'https://s3-ap-southeast-2.amazonaws.com/glow-dev-assets/flight-data-gz.csv'
-            // }).then(function successCallback(response) {
-            //     defer.resolve(response);
-            // }, function errorCallback(error) {
-            //     console.error('Unable to fetch the flight data', error);
-            //     defer.reject(error);
-            // });
-
             $http({
                 method: 'GET',
-                url: '/components/data_service/flight-data-gz.csv'
+                url: 'https://s3-ap-southeast-2.amazonaws.com/glow-dev-assets/flight-data-gz.csv'
             }).then(function successCallback(response) {
                 var flightData = CSV2JSON(response.data);
                 flightData = JSON.parse(flightData);
                 defer.resolve(flightData);
+            }, function errorCallback(error) {
+                console.error('Unable to fetch the flight data', error);
+                defer.reject(error);
             });
+
+            // $http({
+            //     method: 'GET',
+            //     url: '/components/data_service/flight-data-gz.csv'
+            // }).then(function successCallback(response) {
+            //     var flightData = CSV2JSON(response.data);
+            //     flightData = JSON.parse(flightData);
+            //     defer.resolve(flightData);
+            // });
 
             return defer.promise;
         }

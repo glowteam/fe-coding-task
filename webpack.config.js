@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var pluginHtml = require('html-webpack-plugin');
 var pluginExtractText = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var serverHost = '0.0.0.0';
 var serverPort = 8888;

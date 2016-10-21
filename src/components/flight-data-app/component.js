@@ -1,16 +1,24 @@
+let self;
 class FlightDataAppCtrl {
-    constructor(flightDataService) {
+    constructor($rootScope, flightDataService) {
         'ngInject';
-        this.flightDataService = flightDataService;
-        this.dataLoading = true;
-
+        self = this;
+        self.$rootScope = $rootScope;
+        self.flightDataService = flightDataService;
+        self.dataLoading = true;
+        self.selectedLocation = {};
         this.initialise();
+
     }
 
     initialise() {
-        this.flightDataService.loadFlightData().then(() => {
-            this.dataLoading = false;
+        self.flightDataService.initialise().then(() => {
+            self.dataLoading = false;
         });
+    }
+
+    changeSelectedDestination() {
+        self.$rootScope.$broadcast('destination-location-changed');
     }
 
 }

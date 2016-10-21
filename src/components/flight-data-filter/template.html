@@ -1,21 +1,20 @@
 <!-- Filter menu -->
 <md-content flex layout="row" ng-show="!$ctrl.dataLoading">
-    <md-card flex="50">
+    <md-card flex>
         <md-card-actions layout="row" layout-align="center center">
-            <md-select flex="50" ng-model="$ctrl.departureLocation" placeholder="Departure Location" class="md-no-underline">
-            </md-select>
-            <md-select flex="50" ng-model="$ctrl.arrivalLocation" placeholder="Arrival Location" class="md-no-underline">
-            </md-select>
-        </md-card-actions>
-    </md-card>
-    <md-card flex="50">
-        <md-card-actions flex layout="row" layout-align="center center">
-                <md-datepicker flex="50" ng-model="fromDate" md-placeholder="From date"
-                               md-min-date="minDate" md-max-date="maxDate"
-                               md-date-filter="onlyWeekendsPredicate"></md-datepicker>
-                <md-datepicker flex="50" ng-model="toDate" md-placeholder="To date"
-                               md-min-date="minDate" md-max-date="maxDate"
-                               md-date-filter="onlyWeekendsPredicate"></md-datepicker>
+            <md-autocomplete
+                    flex="45"
+                    md-selected-item="$ctrl.selectedDestination"
+                    md-selected-item-change="$ctrl.changeSelectedDestination()"
+                    md-search-text="$ctrl.destinationFilterText"
+                    md-items="destination in $ctrl.filterDestinations($ctrl.destinationFilterText)"
+                    md-item-text="destination.displayName"
+                    md-min-length="0"
+                    placeholder="Select an destination location">
+                <md-item-template>
+                    {{destination.displayName}}
+                </md-item-template>
+            </md-autocomplete>
         </md-card-actions>
     </md-card>
 </md-content>

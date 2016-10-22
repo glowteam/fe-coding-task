@@ -14,13 +14,15 @@
   <body>
     <div ng-app="app">
       <div ng-controller="AppController as app"
-        ng-class="{ loading: app.loading }"
-        ng-cloak>
+           ng-class="{ loading: app.loading }"
+           ng-cloak>
 
         <div class="loader">Loading data...</div>
 
         <div class="center-block">
-          <input ng-model="app.destination" placeholder="Destination code" />
+          <input placeholder="Destination code"
+                 ng-model="app.destination"
+                 ng-model-options="{ debounce: 500 }" />
         </div>
         <frequency-chart data="app.filteredData"></frequency-chart>
         <delay-distance-chart data="app.filteredData"></delay-distance-chart>

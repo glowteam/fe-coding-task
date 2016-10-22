@@ -7,14 +7,23 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="chart/frequency_chart.css">
     <link rel="stylesheet" href="chart/delay_distance_chart.css">
   </head>
   <body>
     <div ng-app="app">
-      <div ng-controller="AppController as app">
-        <frequency-chart data="app.data"></frequency-chart>
-        <delay-distance-chart data="app.data"></delay-distance-chart>
+      <div ng-controller="AppController as app"
+        ng-class="{ loading: app.loading }"
+        ng-cloak>
+
+        <div class="loader">Loading data...</div>
+
+        <div class="center-block">
+          <input ng-model="app.destination" placeholder="Destination code" />
+        </div>
+        <frequency-chart data="app.filteredData"></frequency-chart>
+        <delay-distance-chart data="app.filteredData"></delay-distance-chart>
       </div>
     </div>
 

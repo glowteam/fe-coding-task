@@ -12,7 +12,8 @@ function dataHelper(_) {
     groupByHour: groupByHour,
     groupByMonth: groupByMonth,
     getNumDelayed: getNumDelayed,
-    getTotalDistance: getTotalDistance
+    getTotalDistance: getTotalDistance,
+    filterBy: filterBy
   }
 
 
@@ -132,5 +133,16 @@ function dataHelper(_) {
     return _.reduce(data, function(totalDistance, d) {
       return totalDistance + parseInt(d.distance);
     }, 0);
+  }
+
+
+  /**
+   * Filter data by attribute
+   *
+   * @param {!Array} data The data set
+   * @return {!Array} The filtered data set
+   */
+  function filterBy(data, attr, value) {
+    return _.filter(data, [attr, value.toUpperCase()]);
   }
 }

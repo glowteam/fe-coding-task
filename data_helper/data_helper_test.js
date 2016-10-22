@@ -102,4 +102,16 @@ describe('dataHelper', function() {
     })
   });
 
+
+  describe('filterBy', function() {
+
+    it('does not mutate input data');
+
+    it('returns filtered data set', function() {
+      expect(dataHelper.filterBy(DATA_MOCK, 'destination', 'AUS')).to.deep.equal([
+        { date: '04010400', delay: '-10', distance: '400', origin: 'RDU', destination: 'AUS' }
+      ]);
+    })
+  });
+
 });

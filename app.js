@@ -1,9 +1,10 @@
-/* global d3:false */
+/* global d3:false, _:false */
 
 'use strict';
 
 angular.module('app', [])
   .constant('d3', d3)
+  .constant('_', _)
   .controller('AppController', ['$q', 'd3', AppController]);
 
 function AppController($q, d3) {

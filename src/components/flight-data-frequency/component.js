@@ -5,10 +5,14 @@ class FlightDataFrequencyCtrl {
         self = this;
         self.$scope = $scope;
         self.flightDataService = flightDataService;
-        self.destLocation = "";
+        self.destination = "";
+        self.frequencyChart = null;
 
         self.$scope.$on('destination-location-changed', () => {
-            if (self.flightDataService.getDestinationLocation() !== null) self.bindChart();
+            if (self.flightDataService.getDestinationLocation() !== null) {
+                self.destination = self.flightDataService.getDestinationLocation();
+                self.setChartData();
+            }
         });
 
         self.chartConfig = {
@@ -29,21 +33,16 @@ class FlightDataFrequencyCtrl {
             }, {
                 "id": "delayAxis",
                 "duration": "mm",
-                "durationUnits": {
-                    "hh": "h ",
-                    "mm": "min"
-                },
                 "axisAlpha": 0,
                 "gridAlpha": 0,
-                "inside": true,
                 "position": "right",
                 "title": "average delay"
             }],
             "chartScrollbar": {
-                "graph": "g1",
+                "graph": "departuresGraph",
                 "oppositeAxis":false,
                 "offset":30,
-                "scrollbarHeight": 80,
+                "scrollbarHeight": 60,
                 "backgroundAlpha": 0,
                 "selectedBackgroundAlpha": 0.1,
                 "selectedBackgroundColor": "#888888",
@@ -65,6 +64,7 @@ class FlightDataFrequencyCtrl {
                 "categoryBalloonDateFormat": "JJ:NN, DD MMMM"
             },
              "graphs": [{
+                    "id" : "departuresGraph",
                     "balloon":{
                         "drop":true,
                         "adjustBorderColor":false,
@@ -89,7 +89,7 @@ class FlightDataFrequencyCtrl {
                      "title": "Average Delay",
                      "type": "column",
                      "valueField": "averageDelay",
-                     "valueAxis": "distanceAxis"
+                     "valueAxis": "delayAxis"
                  },
             ],
             "dataDateFormat": "YYYY-MM-DD-HH",
@@ -108,19 +108,24 @@ class FlightDataFrequencyCtrl {
                 "enabled": true
             }
         };
-
         self.bindChart();
     }
 
-    bindChart() {
-        self.chartConfig.dataProvider = self.flightDataService.getDepartureCounts();
-        var chart = AmCharts.makeChart("departures-chart", self.chartConfig);
-        chart.addListener("rendered", self.zoomChart(chart));
-
+    setChartData() {
+        self.frequencyChart.dataProvider = self.flightDataService.getDepartureCounts();
+        self.frequencyChart.validateData();
+        self.zoomChart();
     }
 
-    zoomChart(chart) {
-        chart.zoomToIndexes(chart.dataProvider.length - 40, chart.dataProvider.length - 1);
+    bindChart() {
+        // Create the chart with all the available data
+        self.chartConfig.dataProvider = self.flightDataService.getDepartureCounts();
+        self.frequencyChart = AmCharts.makeChart("departures-chart", self.chartConfig);
+        self.frequencyChart.addListener("rendered", self.zoomChart());
+    }
+
+    zoomChart() {
+        self.frequencyChart.zoomToIndexes(self.frequencyChart.dataProvider.length - 40, self.frequencyChart.dataProvider.length - 1);
     }
 
 }

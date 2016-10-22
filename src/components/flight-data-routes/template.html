@@ -1,0 +1,9 @@
+<md-card flex ng-show="$ctrl.showMapCard">
+    <md-card-header layout-align="center center">
+        Routes to {{$ctrl.destination.name}}
+    </md-card-header>
+    <md-card-content>
+        <div id="routes-map" style="min-height:350px;"></div>
+    </md-card-content>
+    <div>{{$ctrl.routes}}</div>
+</md-card>

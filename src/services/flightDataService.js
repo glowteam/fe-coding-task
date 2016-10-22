@@ -15,6 +15,7 @@ class FlightDataService {
         self.originLocationsCache = [];
         self.destinationLocationsCache = [];
         self.departureCounts = [];
+        self.routes = [];
 
     }
 
@@ -49,6 +50,7 @@ class FlightDataService {
 
     getDepartureCounts() {
 
+        self.departureCounts = [];
         let filteredFlights = [];
         if (self.destinationLocation['iata']) {
             filteredFlights = self.flightDataCache.filter((flight) => flight.destination == self.destinationLocation.iata);
@@ -76,7 +78,10 @@ class FlightDataService {
         return self.departureCounts;
     }
 
+    getDestinationRoutes() {
 
+        return self.routes[self.destinationLocation['iata']];
+    }
 
     _getAirportData() {
 
@@ -117,7 +122,6 @@ class FlightDataService {
             let month = flight[0].substring(0, 2);
             let day = flight[0].substring(2, 4);
             let hour = flight[0].substring(4, 6);
-            let minute = flight[0].substring(6, 8);
             self.flightDataCache.push({
                 date : "2016-" + month + "-" + day + "-" + hour,
                 delay : flight[1],
@@ -129,6 +133,8 @@ class FlightDataService {
             origins.push(flight[3]);
             destinations.push(flight[4]);
         });
+
+        // Split out the unique origins and destinations
 
         let originSet = new Set(origins);
         originSet.forEach((origin) => {
@@ -145,6 +151,21 @@ class FlightDataService {
             if (typeof airport !== 'undefined') {
                 airport.displayName = airport.iata + " - " + airport.name;
                 self.destinationLocationsCache.push(airport);
+            }
+        });
+
+        // Capture the unique routes
+        self.routes = [];
+        self.flightDataCache.forEach((flight) => {
+            let routeKey = flight.destination;
+            if (typeof self.routes[routeKey] == 'undefined') {
+                self.routes[routeKey] = [];
+            }
+            if (typeof self.routes[routeKey][flight.origin] == 'undefined') {
+                self.routes[routeKey][flight.origin] = {
+                    origin: self.airportCache.find((airport) => airport.iata === flight.origin),
+                    distance: flight.distance
+                };
             }
         });
     }

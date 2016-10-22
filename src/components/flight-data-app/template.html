@@ -6,9 +6,10 @@
 </div>
 
 <!-- Main application container -->
-<div flex layout="column" ng-if="!$ctrl.dataLoading">
-        <flight-data-frequency flex></flight-data-frequency>
-        <flight-data-filter flex on-location-change="$ctrl.changeSelectedDestination()"></flight-data-filter>
+<div class="app-container" ng-if="!$ctrl.dataLoading">
+    <flight-data-filter flex on-location-change="$ctrl.changeSelectedDestination()"></flight-data-filter>
+    <flight-data-frequency flex></flight-data-frequency>
+    <flight-data-routes flex></flight-data-routes>
 </div>
 
 

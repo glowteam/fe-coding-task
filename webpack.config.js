@@ -16,7 +16,6 @@ module.exports = {
             'angular-material',
             'angular-material/angular-material.css'
         ],
-        // Entry "src/app.js"
         app: [
             './app.js'
         ]

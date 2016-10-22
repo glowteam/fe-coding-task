@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "amcharts3": "amcharts/amcharts3",
+    "ammap3": "amcharts/ammap3",
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
     "angular-aria": "^1.5.8",

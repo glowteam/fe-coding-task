@@ -1,20 +1,18 @@
 <!-- Filter menu -->
-<md-content flex layout="row" ng-show="!$ctrl.dataLoading">
-    <md-card flex>
-        <md-card-actions layout="row" layout-align="center center">
-            <md-autocomplete
-                    flex="45"
-                    md-selected-item="$ctrl.selectedDestination"
-                    md-selected-item-change="$ctrl.changeSelectedDestination()"
-                    md-search-text="$ctrl.destinationFilterText"
-                    md-items="destination in $ctrl.filterDestinations($ctrl.destinationFilterText)"
-                    md-item-text="destination.displayName"
-                    md-min-length="0"
-                    placeholder="Select an destination location">
-                <md-item-template>
-                    {{destination.displayName}}
-                </md-item-template>
-            </md-autocomplete>
-        </md-card-actions>
-    </md-card>
-</md-content>
+<md-card flex>
+    <md-card-actions layout="row" layout-align="center center">
+        <md-autocomplete
+                flex="45"
+                md-selected-item="$ctrl.selectedDestination"
+                md-selected-item-change="$ctrl.changeSelectedDestination()"
+                md-search-text="$ctrl.destinationFilterText"
+                md-items="destination in $ctrl.filterDestinations($ctrl.destinationFilterText) | orderBy:'iata'"
+                md-item-text="destination.displayName"
+                md-min-length="0"
+                placeholder="Select a destination location">
+            <md-item-template>
+                {{destination.displayName}}
+            </md-item-template>
+        </md-autocomplete>
+    </md-card-actions>
+</md-card>

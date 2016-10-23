@@ -14,17 +14,17 @@ Hovering on a origin in the list will highlight the route on the map. Clicking o
 - amCarts for chart
 - amCarts Map for interactive map
 
-# Installation
+## Installation
 
 `run npm install`
 
-# Running
+## Running
 
 Start the webpack dev server and then hit http://localhost:8888/
 
 `run npm start`
 
-# Whats not so good/could be better
+## Whats not so good/could be better
 
 - A few snippets of inline css in the component templates
 - Duplication of route array to get ng-repeat working correctly

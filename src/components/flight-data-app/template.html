@@ -9,7 +9,7 @@
 <div class="app-container" ng-if="!$ctrl.dataLoading">
     <flight-data-filter flex on-location-change="$ctrl.changeSelectedDestination()"></flight-data-filter>
     <flight-data-frequency flex></flight-data-frequency>
-    <flight-data-routes flex></flight-data-routes>
+    <flight-data-routes flex on-location-change="$ctrl.changeSelectedDestination()"></flight-data-routes>
 </div>
 
 

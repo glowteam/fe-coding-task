@@ -101,7 +101,7 @@ class FlightDataService {
         var deferred = self.$q.defer();
         self.$http({
             method: 'GET',
-            url: '/static/flights.csv'
+            url: 'https://s3-ap-southeast-2.amazonaws.com/glow-dev-assets/flight-data-gz.csv'
         }).then((response) => {
             deferred.resolve(response.data);
         }, (error) => {

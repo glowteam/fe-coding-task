@@ -1,5 +1,4 @@
 import PapaParse from 'papaparse';
-import * as _ from 'lodash/fp';
 
 let self;
 class FlightDataService {

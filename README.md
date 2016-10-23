@@ -13,6 +13,7 @@ Hovering on a origin in the list will highlight the route on the map. Clicking o
 - Angular Material
 - amCarts for chart
 - amCarts Map for interactive map
+- PapaParse for CSV parsing
 
 ## Installation
 
@@ -26,6 +27,7 @@ Start the webpack dev server and then hit http://localhost:8888/
 
 ## Whats not so good/could be better
 
+- No a test to be seen!
 - A few snippets of inline css in the component templates
 - Duplication of route array to get ng-repeat working correctly
 - Responsiveness of the page in general (would not look so good on mobile devices)

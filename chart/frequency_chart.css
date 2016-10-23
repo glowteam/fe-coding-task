@@ -1,0 +1,32 @@
+frequency-chart {
+  display: block;
+}
+
+frequency-chart .axis line, frequency-chart .axis path {
+  fill: none;
+  stroke: #ddd;
+}
+
+frequency-chart .axis text {
+  fill: #aaa;
+}
+
+frequency-chart .axis.y .domain {
+  display: none;
+}
+
+frequency-chart .axis.y .tick:first-of-type {
+  display: none;
+}
+
+frequency-chart .line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+@media (max-width: 768px) {
+  frequency-chart .axis.x .tick:nth-child(odd) {
+    display: none;
+  }
+}

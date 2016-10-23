@@ -1,0 +1,49 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  margin: 40px;
+}
+
+.center-block {
+  margin: 0 auto;
+  max-width: 200px;
+}
+
+input {
+  -webkit-appearance: none;
+  border: 1px #d9d9d9 solid;
+  padding: .5rem;
+  font-size: 100%;
+  vertical-align: middle;
+}
+
+input:hover, input:focus {
+  border-color: #787878;
+  outline: none;
+}
+
+.center-block, frequency-chart, delay-distance-chart {
+  margin-bottom: 30px;
+}
+
+.loader {
+  color: #aaa;
+  display: none;
+  font-size: 1.5em;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  top: 40px;
+}
+
+.loading .loader {
+  display: block;
+  visibility: visible;
+}
+
+.loading * {
+  visibility: hidden;
+}
+
+[ng-cloak] {
+  display: none !important;
+}

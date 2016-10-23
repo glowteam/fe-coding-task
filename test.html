@@ -1,0 +1,42 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/d3-collection/build/d3-collection.js"></script>
+    <script src="node_modules/lodash/lodash.js"></script>
+    <script src="node_modules/mocha/mocha.js"></script>
+    <script src="node_modules/chai/chai.js"></script>
+    <script src="node_modules/sinon/pkg/sinon.js"></script>
+
+    <script>
+      mocha.setup({
+        ui: 'bdd',
+        reporter: 'html'
+      });
+    </script>
+
+    <script src="node_modules/angular-mocks/angular-mocks.js"></script>
+    <script src="app.js"></script>
+    <script src="data_helper/data_helper.js"></script>
+    <script src="data_helper/data_helper_test.js"></script>
+    <script src="chart/frequency_chart.js"></script>
+    <script src="chart/frequency_chart_test.js"></script>
+    <script src="chart/delay_distance_chart.js"></script>
+    <script src="chart/delay_distance_chart_test.js"></script>
+
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>

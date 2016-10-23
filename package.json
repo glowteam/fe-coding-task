@@ -38,14 +38,11 @@
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
     "angular-aria": "^1.5.8",
-    "angular-lodash": "^0.1.1",
     "angular-material": "^1.1.1",
     "angular-sanitize": "^1.5.8",
-    "lodash": "^4.16.4",
-    "ng-lodash": "^0.2.3",
     "papaparse": "^4.1.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js --content-base src/ --progress --colors --hot"
+    "start": "webpack-dev-server --config webpack.config.js --content-base src --progress --colors --hot"
   }
 }

@@ -1,32 +1,35 @@
 # Glow AngularJS Coding Assessment
-To validate a programmers skills in developing modern web applications we would
-like you to create a small AngularJS application.
- 
-## Requirements
-The task we would like you to complete is to create a basic web application that
-fetches flight data and charts it in a graphical UI. The data is a subset of American
-domestic flight information provided by http://www.transtats.bts.gov 
-Note that the date format in the data is in the form `mmddHHmm`.
- 
-* Request the data from one of these two links, the second is compressed:
-  1. https://s3-ap-southeast-2.amazonaws.com/glow-dev-assets/flight-data.csv
-  (5.2MB)
-  1. https://s3-ap-southeast-2.amazonaws.com/glow-dev-assets/flight-data-gz.csv
-  (Content-Encoding: gzip, size 1.1MB)
-* Display a graphical representation of flight frequency versus time of day
-* Display a graphical representation of the delay
-* Display a graphical representation of the flight distance
-* Allow the data to be filtered by destination airport code
- 
-## What we will be looking for
-This is a deliberately open ended task and we are looking to see how you work unencumbered 
-and so we can understand what matters to you as a mobile and web developer. Some key elements
-we will be looking for in the applicant are:
-* Use of suitable design patterns
-* UI interaction, data binding principles and understanding of UX best practices
-* Async development principals when displaying data and making network calls
- 
-## Getting Started
-* Fork this repository
-* Develop the single page app
-* When complete please send us a pull request
+
+Use this utility to view flight departures per hour and the average delay time for that hour.
+
+You can also filter the data be selecting a destination from the list. This wil then render an interactive map showing the routes to that destination. Hover over the route on the map to show the origin and destination as well as the distance.
+
+Hovering on a origin in the list will highlight the route on the map. Clicking on it will change the destination filter to the selected origin.
+
+## Technologies Used
+- Webpack for dev environment (packaging and live reloading)
+- Babel for ES6 transpilation
+- Angular 1.5
+- Angular Material
+- amCarts for chart
+- amCarts Map for interactive map
+- PapaParse for CSV parsing
+
+## Installation
+
+`npm install`
+
+## Running
+
+Start the webpack dev server and then hit http://localhost:8888/
+
+`npm run start`
+
+## Whats not so good/could be better
+
+- No a test to be seen!
+- A few snippets of inline css in the component templates
+- Duplication of route array to get ng-repeat working correctly
+- Responsiveness of the page in general (would not look so good on mobile devices)
+
+

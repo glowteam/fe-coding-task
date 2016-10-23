@@ -1,0 +1,16 @@
+
+<!-- Wait for the data to load before we all the main components to load -->
+<div flex layout="column" layout-fill ng-show="$ctrl.dataLoading" layout-align="center center">
+    <md-progress-circular md-diameter="96"></md-progress-circular>
+    <div><span class="md-headline">Fetching data.....</span></div>
+</div>
+
+<!-- Main application container -->
+<div class="app-container" ng-if="!$ctrl.dataLoading">
+    <flight-data-filter flex on-location-change="$ctrl.changeSelectedDestination()"></flight-data-filter>
+    <flight-data-frequency flex></flight-data-frequency>
+    <flight-data-routes flex on-location-change="$ctrl.changeSelectedDestination()"></flight-data-routes>
+</div>
+
+
+

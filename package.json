@@ -1,0 +1,48 @@
+{
+  "name": "fe-coding-task",
+  "version": "0.0.1",
+  "description": "Response to Glow coding task",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-rt-works/fe-coding-task.git"
+  },
+  "author": "Rowan Truscott",
+  "license": "TAKEIT",
+  "devDependencies": {
+    "autoprefixer-loader": "^2.0.0",
+    "babel-core": "^5.8.21",
+    "babel-loader": "^5.3.2",
+    "clean-webpack-plugin": "^0.1.3",
+    "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "^0.15.6",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "file-loader": "^0.8.4",
+    "html-webpack-plugin": "^1.6.1",
+    "image-webpack-loader": "^1.6.1",
+    "imagemin": "^3.2.0",
+    "json-loader": "^0.5.2",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
+    "ng-annotate": "^1.0.2",
+    "ng-annotate-loader": "0.0.6",
+    "ng-cache-loader": "0.0.9",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.10.1"
+  },
+  "dependencies": {
+    "amcharts3": "amcharts/amcharts3",
+    "ammap3": "amcharts/ammap3",
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-aria": "^1.5.8",
+    "angular-material": "^1.1.1",
+    "angular-sanitize": "^1.5.8",
+    "papaparse": "^4.1.2"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.config.js --content-base src --progress --colors --hot"
+  }
+}

@@ -16,13 +16,13 @@ Hovering on a origin in the list will highlight the route on the map. Clicking o
 
 ## Installation
 
-`run npm install`
+`npm install`
 
 ## Running
 
 Start the webpack dev server and then hit http://localhost:8888/
 
-`run npm start`
+`npm run start`
 
 ## Whats not so good/could be better
 

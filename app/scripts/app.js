@@ -3,5 +3,7 @@
 angular
   .module('flightDataApp', [
     'ngRoute',
-    'ngMaterial'
+    'ngMaterial',
+
+    'papaParse'
   ]);

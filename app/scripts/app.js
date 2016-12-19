@@ -5,5 +5,7 @@ angular
     'ngRoute',
     'ngMaterial',
 
-    'papaParse'
+    'papaParse',
+    'uiGmapgoogle-maps',
+    'googlechart'
   ]);

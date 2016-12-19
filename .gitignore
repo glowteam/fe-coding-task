@@ -14,5 +14,8 @@ bower_components
 # Optional npm cache directory
 .npm
 
+.DS_Store
 .sass-cache
 .tmp
+firebase.json
+.firebaserc

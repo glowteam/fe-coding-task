@@ -31,7 +31,7 @@
     </md-sidenav>
 
     <div flex layout="column">
-      <md-toolbar>
+      <md-toolbar scroll-shadow="main-content">
         <div class="md-toolbar-tools">
           <md-button class="md-icon-button" hide-gt-md aria-label="Open menu">
             <md-icon md-svg-icon="navigation:menu"></md-icon>
@@ -39,7 +39,7 @@
         </div>
       </md-toolbar>
 
-      <md-content flex>
+      <md-content id="main-content" flex>
         <div ng-view flex></div>
       </md-content>
     </div>
@@ -55,6 +55,7 @@
        ga('send', 'pageview');
     </script>
 
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
@@ -64,17 +65,23 @@
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/papaparse/papaparse.js"></script>
+    <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="bower_components/angular-google-chart/ng-google-chart.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/config.js"></script>
         <script src="scripts/icons.js"></script>
         <script src="scripts/route.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/services/flightData.js"></script>
-
+        <script src="scripts/directives/scrollShadow.js"></script>
         <script src="scripts/papa/papa.js"></script>
         <!-- endbuild -->
+
 </body>
 </html>

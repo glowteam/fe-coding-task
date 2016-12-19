@@ -1,1 +1,74 @@
-<md-progress-linear class="md-accent" ng-hide="main.isFlightDataLoaded" mode="indeterminate"></md-progress-linear>
+<md-progress-linear class="md-accent" ng-hide="ctrl.isFlightDataLoaded" mode="indeterminate"></md-progress-linear>
+<div class="md-padding" layout="row" layout-align="center center">
+  <md-autocomplete
+      ng-show="ctrl.isFlightDataLoaded"
+      md-selected-item="ctrl.selectedItem"
+      md-selected-item-change="ctrl.selectedItemChange(item)"
+      md-search-text="ctrl.searchText"
+      md-items="item in ctrl.querySearch(ctrl.searchText) | orderBy:'iata'"
+      md-item-text="item.name"
+      md-min-length="0"
+      placeholder="Choose a destination"
+      flex="70">
+    <md-item-template>
+      <span md-highlight-text="ctrl.searchText">{{item.iata}}: {{item.name}}</span>
+    </md-item-template>
+  </md-autocomplete>
+</div>
+
+<div ng-show="ctrl.selectedItem" flex layout="row" layout-xs="column" layout-align="start start" layout-align-xs="start stretch" layout-wrap>
+  <div layout="column" flex>
+    <md-card class="info-card" flex>
+      <md-list>
+        <md-list-item>
+          <md-icon md-svg-icon="map:place"></md-icon>
+          <p>{{ctrl.selectedItem.name}}</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon md-svg-icon="action:flight_land"></md-icon>
+          <p>{{ctrl.totalLand}} planes are landed</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon md-svg-icon="action:watch_later"></md-icon>
+          <p>{{ctrl.totalDelayed}} planes are delayed</p>
+        </md-list-item>
+      </md-list>
+    </md-card>
+
+    <md-card ng-if="ctrl.map.center" flex>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Flights to {{ctrl.selectedItem.iata}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <ui-gmap-google-map center="ctrl.map.center" zoom="ctrl.map.zoom" options="ctrl.map.options">
+        <ui-gmap-marker
+            idKey="ctrl.map.destination.options.label"
+            coords="ctrl.map.destination.coords"
+            options="ctrl.map.destination.options">
+        </ui-gmap-marker>
+        <ui-gmap-markers models="ctrl.map.origins" coords="'coords'" icon="'icon'" options="'options'" click="ctrl.onClick">
+          <ui-gmap-windows show="show">
+            <div ng-non-bindable>Distance: {{distance}} km</div>
+          </ui-gmap-windows>
+        </ui-gmap-markers>
+        <ui-gmap-polyline
+            ng-repeat="polyline in ctrl.map.polylines"
+            path="polyline.path"
+            stroke="polyline.stroke">
+        </ui-gmap-polyline>
+      </ui-gmap-google-map>
+    </md-card>
+  </div>
+
+  <div layout="column" flex>
+    <md-card flex>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Flight frequency vs time of day</span>
+        </md-card-title-text>
+      </md-card-title>
+      <div google-chart chart="ctrl.chart" style="width: 100%; height: 400px;"></div>
+    </md-card>
+  </div>
+</div>

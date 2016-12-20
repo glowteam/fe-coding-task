@@ -12,6 +12,7 @@ angular
     self.totalLand = 0;
     self.totalDelayed = 0;
     self.totalDistance = 0;
+    self.totalStartingPoints = 0;
     self.onClick = onClick;
     self.init = init;
 

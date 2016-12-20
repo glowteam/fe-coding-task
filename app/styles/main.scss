@@ -17,6 +17,14 @@ body {
   display: none !important;
 }
 
+@media (min-width: 1280px) {
+  .main-column-width {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .angular-google-map-container {
   height: 400px;
 }

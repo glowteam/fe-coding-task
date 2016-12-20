@@ -1,5 +1,8 @@
 <md-progress-linear class="md-accent" ng-hide="ctrl.isFlightDataLoaded" mode="indeterminate"></md-progress-linear>
-<div class="md-padding" layout="row" layout-align="center center">
+
+<div class="main-column-width">
+
+<div class="md-padding" flex layout="row" layout-align="center center">
   <md-autocomplete
       ng-show="ctrl.isFlightDataLoaded"
       md-selected-item="ctrl.selectedItem"
@@ -16,7 +19,13 @@
   </md-autocomplete>
 </div>
 
-<div ng-show="ctrl.selectedItem" flex layout="row" layout-xs="column" layout-align="start start" layout-align-xs="start stretch" layout-wrap>
+<div ng-show="ctrl.selectedItem"
+    flex
+    layout="row" layout-align="start start"
+    layout-sm="column" layout-align-sm="start stretch"
+    layout-xs="column" layout-align-xs="start stretch"
+    layout-wrap>
+
   <div layout="column" flex>
     <md-card class="info-card" flex>
       <md-list>
@@ -35,6 +44,17 @@
       </md-list>
     </md-card>
 
+    <md-card flex>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Flight frequency vs time of day</span>
+        </md-card-title-text>
+      </md-card-title>
+      <div google-chart chart="ctrl.chart" style="width: 100%; height: 400px;"></div>
+    </md-card>
+  </div>
+
+  <div layout="column" flex>
     <md-card ng-if="ctrl.map.center" flex>
       <md-card-title>
         <md-card-title-text>
@@ -60,15 +80,6 @@
       </ui-gmap-google-map>
     </md-card>
   </div>
+</div>
 
-  <div layout="column" flex>
-    <md-card flex>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Flight frequency vs time of day</span>
-        </md-card-title-text>
-      </md-card-title>
-      <div google-chart chart="ctrl.chart" style="width: 100%; height: 400px;"></div>
-    </md-card>
-  </div>
 </div>

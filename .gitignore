@@ -19,3 +19,4 @@ bower_components
 .tmp
 firebase.json
 .firebaserc
+database.rules.json

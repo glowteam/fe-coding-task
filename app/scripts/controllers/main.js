@@ -11,6 +11,7 @@ angular
     self.flightsTo = [];
     self.totalLand = 0;
     self.totalDelayed = 0;
+    self.totalDistance = 0;
     self.onClick = onClick;
     self.init = init;
 
@@ -36,8 +37,8 @@ angular
 
     function setMapData(destination) {
       var flightsTo = flightDataService.getFlightsTo(destination.iata);
-      var polylines = [];
       var origins = [];
+      var polylines = [];
       for (var key in flightsTo) {
         self.flightsTo.push(flightsTo[key]);
 
@@ -59,9 +60,9 @@ angular
 
         polylines.push({
           stroke: {
-            color: '#303f9f',
+            color: '#ff4081',
             weight: 1,
-            opacity: 0.8
+            opacity: 1
           },
           path: [
             { latitude: destination.lat, longitude: destination.lon },
@@ -71,6 +72,15 @@ angular
       }
 
       self.map = {
+        zoom: 4,
+        center: {
+          latitude: destination.lat,
+          longitude: destination.lon
+        },
+        options: {
+          scrollwheel: false
+        },
+
         destination: {
           coords: {
             latitude: destination.lat,
@@ -80,14 +90,6 @@ angular
             label: destination.iata
           }
         },
-        zoom: 4,
-        options: {
-          scrollwheel: false
-        },
-        center: {
-          latitude: destination.lat,
-          longitude: destination.lon
-        },
         origins: origins,
         polylines: polylines
       };
@@ -96,55 +98,6 @@ angular
     function onClick(marker, eventName, model) {
       model.show = !model.show;
     }
-
-    function setChartData(destination) {
-      var flights = flightDataService.getFlightFrequency(destination.iata);
-      var data = [];
-      for (var hour in flights) {
-        self.totalLand += flights[hour].count;
-
-        var onTimeCount = flights[hour].count;
-        var averageDelay = 0;
-        if (typeof flights[hour].delay !== 'undefined') {
-          self.totalDelayed += flights[hour].delay.count;
-          onTimeCount -= flights[hour].delay.count;
-          averageDelay = flights[hour].delay.time / flights[hour].delay.count;
-        }
-
-        var c = [
-          { v: parseInt(hour), f: 'Flights at ' + parseInt(hour) + ' - ' + (parseInt(hour) + 1) },
-          { v: onTimeCount, f: onTimeCount + (onTimeCount > 1 ? ' times' : ' time') }
-        ];
-        if (typeof flights[hour].delay !== 'undefined') {
-          c.push({
-            v: flights[hour].delay.count,
-            f: flights[hour].delay.count + (flights[hour].delay.count > 1 ? ' times' : ' time') + '\nAverage: ' +
-                averageDelay.toPrecision(2) + (averageDelay > 1 ? ' hours ' : ' hour ') + 'delayed'
-          });
-
-        }
-
-        c.push(null);
-        data.push({ c: c });
-      }
-
-      data.sort(function(a, b) {
-        return a.c[0].v - b.c[0].v;
-      });
-
-      self.chart.data.rows = data;
-    }
-
-    function init() {
-      flightDataService.loadAll().then(function() {
-        self.airports = flightDataService.getAirports();
-        self.isFlightDataLoaded = true;
-      }).catch(function(error) {
-        console.log(error);
-      });
-    }
-
-    self.init();
 
     self.chart = {
       type: 'ColumnChart',
@@ -197,4 +150,57 @@ angular
       formatters: {},
       view: {}
     };
+
+    function setChartData(destination) {
+      var flights = flightDataService.getFlightFrequency(destination.iata);
+      var data = [];
+      for (var hour in flights) {
+        self.totalLand += flights[hour].count;
+
+        var onTimeCount = flights[hour].count;
+        var delayCount = 0;
+        var averageDelay = 0;
+        if (typeof flights[hour].delay !== 'undefined') {
+          delayCount = flights[hour].delay.count;
+          onTimeCount -= delayCount;
+          self.totalDelayed += delayCount;
+          averageDelay = flights[hour].delay.time / delayCount;
+        }
+
+        // Transform data into angular-google-chart data format
+        var c = [
+          { v: parseInt(hour), f: 'Flights at ' + parseInt(hour) + ' - ' + (parseInt(hour) + 1) },
+          { v: onTimeCount, f: onTimeCount + (onTimeCount > 1 ? ' times' : ' time') }
+        ];
+        if (delayCount > 0) {
+          c.push({
+            v: delayCount,
+            f: delayCount + (delayCount > 1 ? ' times' : ' time') + '\nAverage: ' +
+              averageDelay.toFixed(2) + (averageDelay > 1 ? ' hours ' : ' hour ') + 'delayed'
+          });
+
+        }
+
+        c.push(null);
+        data.push({ c: c });
+      }
+
+      // Sort to display columns by hour
+      data.sort(function(a, b) {
+        return a.c[0].v - b.c[0].v;
+      });
+
+      self.chart.data.rows = data;
+    }
+
+    function init() {
+      flightDataService.loadAll().then(function() {
+        self.airports = flightDataService.getAirports();
+        self.isFlightDataLoaded = true;
+      }).catch(function(error) {
+        console.log(error);
+      });
+    }
+
+    self.init();
   });

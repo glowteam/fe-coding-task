@@ -7,5 +7,6 @@ angular
 
     'papaParse',
     'uiGmapgoogle-maps',
-    'googlechart'
+    'googlechart',
+    'd3'
   ]);

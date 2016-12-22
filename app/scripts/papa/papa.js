@@ -2,7 +2,7 @@
 
 angular
   .module('papaParse', [])
-  .factory('papa', function($window) {
+  .factory('papaParseService', function($window) {
     if ($window.Papa) {
       $window._thirdParty = $window._thirdParty || {};
       $window._thirdParty.Papa = $window.Papa;

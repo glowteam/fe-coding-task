@@ -2,7 +2,7 @@
 
 angular
   .module('flightDataApp')
-  .factory('flightDataService', function($http, $q, papa) {
+  .factory('flightDataService', function($http, $q, papaParseService) {
     var FLIGHT_DATA_URL = 'https://s3-ap-southeast-2.amazonaws.com/glow-dev-assets/flight-data-gz.csv';
     var AIRPORT_DATA_URL = '/assets/airports.json';
 
@@ -57,7 +57,7 @@ angular
     }
 
     function processFlightData(data, airports) {
-      self.flights = papa.parse(data, { header: true }).data;
+      self.flights = papaParseService.parse(data, { header: true }).data;
 
       // Extract airports we need from international airport data.
       var dests = self.flights.map(function(flight) { return flight.destination; });
@@ -111,6 +111,7 @@ angular
         var hour = flight.date.substring(4, 6);
         if (typeof flightsByHour[hour] === 'undefined') {
           flightsByHour[hour] = {
+            date: '2016-' + flight.date.substring(0, 2) + '-' + flight.date.substring(2, 4),
             count: 1
           };
         } else {

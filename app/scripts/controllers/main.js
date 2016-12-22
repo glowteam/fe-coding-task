@@ -2,7 +2,7 @@
 
 angular
   .module('flightDataApp')
-  .controller('MainCtrl', function(flightDataService) {
+  .controller('MainCtrl', function(flightDataService, d3Service) {
     var self = this;
     self.isFlightDataLoaded = false;
     self.airports = [];

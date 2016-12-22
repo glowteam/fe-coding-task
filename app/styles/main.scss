@@ -1,0 +1,74 @@
+// bower:scss
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+}
+
+// Hide when Angular is not yet loaded and initialized
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+@media (min-width: 1280px) {
+  .main-column-width {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.angular-google-map-container {
+  height: 400px;
+}
+
+.info-card {
+  background: #c2185b;
+  color: #fff;
+}
+.info-card md-icon {
+  color: #fff;
+}
+
+.day {
+  fill: #fff;
+  stroke: #ccc;
+}
+
+.month {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+}
+
+.p0 { fill: #ff4081; }
+.p1 { fill: #e8eaf6; }
+.p2 { fill: #c5cae9; }
+.p3 { fill: #9fa8da; }
+.p4 { fill: #7986cb; }
+.p5 { fill: #5c6Bc0; }
+.p6 { fill: #3f51b5; }
+.p7 { fill: #3949ab; }
+.p8 { fill: #303f9f; }
+.p9 { fill: #283593; }
+.p10 { fill: #1a237e; }
+
+#tooltip {
+  color: #fff;
+  border-radius: 2px;
+  // vertical-align: middle;
+
+  font-size: 14px;
+  background-color: #616161;
+  opacity: 0.9;
+
+  height: 32px;
+  padding: 10px 16px 0 16px;
+}
